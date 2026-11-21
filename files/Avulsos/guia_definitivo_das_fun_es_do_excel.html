@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do Zero ao Domínio: O Guia Definitivo das Principais Funções do Excel | Checkpoint do Prof. Luis Carvalho</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            black: '#07090e',
+                            dark: '#0e131f',
+                            card: '#131b2e',
+                            border: '#1e2d4a',
+                            green: '#00ff88',
+                            emerald: '#10b981',
+                            blue: '#00d2ff',
+                            electric: '#3b82f6',
+                            purple: '#a855f7',
+                            muted: '#94a3b8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom Cyber Styling & Animations */
+        body {
+            background-color: #07090e;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Neon Glow Effects */
+        .glow-green {
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.25);
+        }
+        .glow-blue {
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.25);
+        }
+        .glow-card:hover {
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.3);
+            border-color: #00d2ff;
+        }
+        .text-glow-green {
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+        .text-glow-blue {
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+        }
+
+        /* Subtle Grid Pattern Background */
+        .bg-cyber-grid {
+            background-image: 
+                linear-gradient(to right, rgba(30, 45, 74, 0.25) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 45, 74, 0.25) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* Glassmorphism Effect */
+        .glass-panel {
+            background: rgba(14, 19, 31, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid #1e2d4a;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #07090e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e2d4a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00d2ff;
+        }
+
+        /* Custom Notification Toast */
+        #toast {
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+    </style>
+</head>
+<body class="bg-cyber-black bg-cyber-grid min-h-screen text-slate-200 antialiased selection:bg-cyber-green selection:text-black">
+
+    <!-- Notification Toast for Copy Action -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 glass-panel px-5 py-3 rounded-xl border border-cyber-green flex items-center space-x-3 text-cyber-green shadow-2xl">
+        <i class="fa-solid fa-circle-check text-xl"></i>
+        <span id="toast-message" class="font-mono text-sm font-medium">Fórmula copiada para a área de transferência!</span>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <article class="max-w-5xl mx-auto px-4 py-8 md:py-12">
+        
+        <!-- HEADER / BRANDING -->
+        <header class="glass-panel rounded-3xl p-6 md:p-10 mb-10 border border-cyber-border relative overflow-hidden">
+            <!-- Background Radial Gradient -->
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-cyber-blue/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-cyber-green/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10">
+                <!-- Blog Badge -->
+                <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-cyber-dark border border-cyber-border text-xs font-mono text-cyber-green mb-6">
+                    <span class="w-2 h-2 rounded-full bg-cyber-green animate-pulse"></span>
+                    <span>CHECKPOINT DO PROF. LUIS CARVALHO</span>
+                </div>
+
+                <h1 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+                    Do Zero ao Domínio: O Guia Definitivo das <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-green via-cyber-blue to-cyber-purple text-glow-green">Principais Funções do Excel</span>
+                </h1>
+
+                <p class="text-slate-400 text-base md:text-lg max-w-3xl leading-relaxed mb-8">
+                    Desbloqueie o verdadeiro potencial dos seus dados. Do cálculo automatizado básico às buscas dinâmicas multidimensionais com <span class="text-cyber-green font-mono">PROCX</span> e <span class="text-cyber-blue font-mono">ÍNDICE+CORRESP</span>.
+                </p>
+
+                <!-- Article Meta info -->
+                <div class="flex flex-wrap items-center gap-4 md:gap-8 pt-6 border-t border-cyber-border/60 text-xs md:text-sm text-slate-400 font-mono">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-user-check text-cyber-green"></i>
+                        <span>Prof. Luis Carvalho</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-clock text-cyber-blue"></i>
+                        <span>Leitura: 12 min</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-layer-group text-cyber-purple"></i>
+                        <span>Básico, Intermediário & Avançado</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- CONCEPTUAL HERO BANNER (SVG GRAPHIC) -->
+        <section class="glass-panel rounded-2xl p-6 mb-12 border border-cyber-border overflow-hidden">
+            <div class="text-center mb-4">
+                <span class="text-xs font-mono text-cyber-muted uppercase tracking-widest">VISUALIZADOR DA ARQUITETURA DE DADOS</span>
+            </div>
+            <div class="w-full flex justify-center items-center">
+                <svg viewBox="0 0 800 240" class="w-full h-auto max-h-60 rounded-xl bg-cyber-black/60 p-4 border border-cyber-border/40">
+                    <defs>
+                        <linearGradient id="gradGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#00ff88" stop-opacity="0.8"/>
+                            <stop offset="100%" stop-color="#10b981" stop-opacity="0.2"/>
+                        </linearGradient>
+                        <linearGradient id="gradBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#00d2ff" stop-opacity="0.8"/>
+                            <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.2"/>
+                        </linearGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+
+                    <!-- Connecting Grid Lines -->
+                    <path d="M 150 120 L 300 60 M 150 120 L 300 180 M 300 60 L 500 60 M 300 180 L 500 180 M 500 60 L 650 120 M 500 180 L 650 120" stroke="#1e2d4a" stroke-width="2" stroke-dasharray="4,4" />
+
+                    <!-- Node 1: Entradas -->
+                    <g transform="translate(150, 120)">
+                        <circle r="35" fill="url(#gradBlue)" stroke="#00d2ff" stroke-width="2" filter="url(#glow)"/>
+                        <text y="-5" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono" font-size="12" font-weight="bold">DADOS</text>
+                        <text y="12" text-anchor="middle" fill="#00d2ff" font-family="JetBrains Mono" font-size="10">BRUTOS</text>
+                    </g>
+
+                    <!-- Node 2: Básico/Matemática -->
+                    <g transform="translate(300, 60)">
+                        <rect x="-45" y="-25" width="90" height="50" rx="10" fill="#0e131f" stroke="#00ff88" stroke-width="1.5" filter="url(#glow)"/>
+                        <text y="-2" text-anchor="middle" fill="#00ff88" font-family="JetBrains Mono" font-size="11" font-weight="bold">SOMA / MÉDIA</text>
+                        <text y="14" text-anchor="middle" fill="#94a3b8" font-family="Inter" font-size="9">Agregação</text>
+                    </g>
+
+                    <!-- Node 3: Lógica/Filtro -->
+                    <g transform="translate(300, 180)">
+                        <rect x="-45" y="-25" width="90" height="50" rx="10" fill="#0e131f" stroke="#00d2ff" stroke-width="1.5"/>
+                        <text y="-2" text-anchor="middle" fill="#00d2ff" font-family="JetBrains Mono" font-size="11" font-weight="bold">SE / SOMASE</text>
+                        <text y="14" text-anchor="middle" fill="#94a3b8" font-family="Inter" font-size="9">Lógica & Condição</text>
+                    </g>
+
+                    <!-- Node 4: Busca Avançada -->
+                    <g transform="translate(500, 60)">
+                        <rect x="-50" y="-25" width="100" height="50" rx="10" fill="#0e131f" stroke="#a855f7" stroke-width="1.5"/>
+                        <text y="-2" text-anchor="middle" fill="#a855f7" font-family="JetBrains Mono" font-size="11" font-weight="bold">PROCX / PROCV</text>
+                        <text y="14" text-anchor="middle" fill="#94a3b8" font-family="Inter" font-size="9">Cruzamento</text>
+                    </g>
+
+                    <!-- Node 5: Tratamento de Erros -->
+                    <g transform="translate(500, 180)">
+                        <rect x="-50" y="-25" width="100" height="50" rx="10" fill="#0e131f" stroke="#00ff88" stroke-width="1.5"/>
+                        <text y="-2" text-anchor="middle" fill="#00ff88" font-family="JetBrains Mono" font-size="11" font-weight="bold">SEERRO</text>
+                        <text y="14" text-anchor="middle" fill="#94a3b8" font-family="Inter" font-size="9">Sanitização</text>
+                    </g>
+
+                    <!-- Node 6: Dashboard Output -->
+                    <g transform="translate(650, 120)">
+                        <circle r="38" fill="url(#gradGreen)" stroke="#00ff88" stroke-width="2" filter="url(#glow)"/>
+                        <text y="-5" text-anchor="middle" fill="#ffffff" font-family="JetBrains Mono" font-size="11" font-weight="bold">DECISÃO</text>
+                        <text y="12" text-anchor="middle" fill="#00ff88" font-family="JetBrains Mono" font-size="9">DASHBOARDS</text>
+                    </g>
+                </svg>
+            </div>
+        </section>
+
+        <!-- INTRODUCTION PARAGRAPH -->
+        <section class="prose prose-invert max-w-none mb-12 text-slate-300 leading-relaxed text-base md:text-lg">
+            <p>
+                No cenário corporativo e acadêmico atual, a capacidade de extrair respostas rápidas e confiáveis a partir de dados brutos deixou de ser um diferencial para se tornar um <strong>requisito fundamental</strong>. O Microsoft Excel permanece como o ecossistema mais versátil do planeta para essa missão. No entanto, usar o Excel apenas como uma tabela de anotações manuais é como dirigir uma nave espacial em primeira marcha.
+            </p>
+            <p class="mt-4">
+                Neste guia prático e definitivo criado para o <strong class="text-cyber-green">Checkpoint do Prof. Luis Carvalho</strong>, desmistificaremos as principais funções essenciais divididas em três níveis estratégicos: <span class="text-cyber-green font-semibold">Básico</span>, <span class="text-cyber-blue font-semibold">Intermediário</span> e <span class="text-cyber-purple font-semibold">Avançado</span>.
+            </p>
+        </section>
+
+        <!-- SEARCH AND FILTER CONTROLS (INTERACTIVE) -->
+        <div class="glass-panel rounded-2xl p-4 md:p-6 mb-10 border border-cyber-border sticky top-4 z-40 shadow-2xl">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <!-- Search Input -->
+                <div class="relative w-full md:w-1/2">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-cyber-muted"></i>
+                    <input type="text" id="searchInput" onkeyup="filterFunctions()" placeholder="Pesquisar função (ex: PROCX, SE, SOMASE)..." class="w-full bg-cyber-dark border border-cyber-border rounded-xl pl-11 pr-4 py-3 text-sm font-mono text-white placeholder-slate-500 focus:outline-none focus:border-cyber-blue transition-colors">
+                </div>
+
+                <!-- Filter Tabs -->
+                <div class="flex items-center justify-center gap-1 bg-cyber-dark p-1.5 rounded-xl border border-cyber-border w-full md:w-auto overflow-x-auto">
+                    <button onclick="setFilter('all')" id="btn-all" class="px-4 py-2 rounded-lg text-xs font-mono transition-all bg-cyber-blue text-black font-bold">TODAS</button>
+                    <button onclick="setFilter('basico')" id="btn-basico" class="px-4 py-2 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-white">BÁSICO</button>
+                    <button onclick="setFilter('intermediario')" id="btn-intermediario" class="px-4 py-2 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-white">INTERMEDIÁRIO</button>
+                    <button onclick="setFilter('avancado')" id="btn-avancado" class="px-4 py-2 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-white">AVANÇADO</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SECTION 1: BÁSICO ==================== -->
+        <div class="section-group mb-12" data-section="basico">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="p-2.5 rounded-xl bg-cyber-green/10 border border-cyber-green/30 text-cyber-green">
+                    <i class="fa-solid fa-cubes text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-white tracking-wide">1. Nível Básico: A Fundação Operacional</h2>
+                    <p class="text-xs font-mono text-cyber-muted">Operações essenciais para automatizar cálculos recorrentes e eliminar erros manuais.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6">
+                
+                <!-- CARD: SOMA -->
+                <div class="function-card glass-panel rounded-2xl p-6 border border-cyber-border glow-card transition-all" data-level="basico" data-keywords="soma sum matematica adicao">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="px-3 py-1 rounded-md bg-cyber-green/20 border border-cyber-green text-cyber-green font-mono text-xs font-bold">BÁSICO</span>
+                            <h3 class="text-xl font-bold text-white font-mono">SOMA (SUM)</h3>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400"><i class="fa-solid fa-calculator mr-1"></i> Matemática</span>
+                    </div>
+
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        Adiciona todos os números dentro de um intervalo selecionado. É o pilar fundamental para qualquer controle financeiro, consolidação de estoque ou relatório de despesas.
+                    </p>
+
+                    <!-- Terminal Code Block -->
+                    <div class="bg-cyber-black rounded-xl p-4 border border-cyber-border/80 font-mono text-sm relative mb-4">
+                        <div class="flex items-center justify-between text-xs text-cyber-muted mb-2 border-b border-cyber-border/40 pb-2">
+                            <span>SINTAXE DO EXCEL</span>
+                            <button onclick="copyFormula('SOMA(A1:A10)', 'SOMA')" class="hover:text-cyber-green transition-colors flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> Copiar
+                            </button>
+                        </div>
+                        <code class="text-cyber-green font-semibold">=SOMA(A1:A10)</code>
+                    </div>
+
+                    <div class="bg-cyber-dark/60 rounded-xl p-4 border border-cyber-border/40 text-xs text-slate-300">
+                        <span class="text-cyber-blue font-bold font-mono uppercase block mb-1">Exemplo Prático:</span>
+                        Se o seu departamento possui gastos de R$ 10, R$ 20 e R$ 30 nas células <code class="text-cyber-green font-mono">A1</code> até <code class="text-cyber-green font-mono">A3</code>, o comando <code class="text-cyber-green font-mono">=SOMA(A1:A3)</code> devolverá automaticamente <strong>R$ 60,00</strong>.
+                    </div>
+                </div>
+
+                <!-- CARD: MÉDIA -->
+                <div class="function-card glass-panel rounded-2xl p-6 border border-cyber-border glow-card transition-all" data-level="basico" data-keywords="media average estatistica nota desempenho">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="px-3 py-1 rounded-md bg-cyber-green/20 border border-cyber-green text-cyber-green font-mono text-xs font-bold">BÁSICO</span>
+                            <h3 class="text-xl font-bold text-white font-mono">MÉDIA (AVERAGE)</h3>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400"><i class="fa-solid fa-chart-line mr-1"></i> Estatística</span>
+                    </div>
+
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        Calcula a média aritmética simples de um grupo de valores. Soma os elementos do intervalo e divide pela quantidade de números presentes.
+                    </p>
+
+                    <!-- Terminal Code Block -->
+                    <div class="bg-cyber-black rounded-xl p-4 border border-cyber-border/80 font-mono text-sm relative mb-4">
+                        <div class="flex items-center justify-between text-xs text-cyber-muted mb-2 border-b border-cyber-border/40 pb-2">
+                            <span>SINTAXE DO EXCEL</span>
+                            <button onclick="copyFormula('MÉDIA(B2:B5)', 'MÉDIA')" class="hover:text-cyber-green transition-colors flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> Copiar
+                            </button>
+                        </div>
+                        <code class="text-cyber-green font-semibold">=MÉDIA(B2:B5)</code>
+                    </div>
+
+                    <div class="bg-cyber-dark/60 rounded-xl p-4 border border-cyber-border/40 text-xs text-slate-300">
+                        <span class="text-cyber-blue font-bold font-mono uppercase block mb-1">Exemplo Prático:</span>
+                        Para calcular a nota média do semestre de um aluno com notas 8,0; 7,0; 9,0 e 6,0 nas células de <code class="text-cyber-green font-mono">B2</code> a <code class="text-cyber-green font-mono">B5</code>, a função devolverá <strong>7,5</strong>.
+                    </div>
+                </div>
+
+                <!-- CARD: CONT.SE -->
+                <div class="function-card glass-panel rounded-2xl p-6 border border-cyber-border glow-card transition-all" data-level="basico" data-keywords="cont.se countif contagem filtro criterio">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="px-3 py-1 rounded-md bg-cyber-green/20 border border-cyber-green text-cyber-green font-mono text-xs font-bold">BÁSICO</span>
+                            <h3 class="text-xl font-bold text-white font-mono">CONT.SE (COUNTIF)</h3>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400"><i class="fa-solid fa-list-check mr-1"></i> Contagem Condicional</span>
+                    </div>
+
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        Conta quantas células em um determinado intervalo atendem a um critério ou condição específica (como um texto exato ou uma meta numérica).
+                    </p>
+
+                    <!-- Terminal Code Block -->
+                    <div class="bg-cyber-black rounded-xl p-4 border border-cyber-border/80 font-mono text-sm relative mb-4">
+                        <div class="flex items-center justify-between text-xs text-cyber-muted mb-2 border-b border-cyber-border/40 pb-2">
+                            <span>SINTAXE DO EXCEL</span>
+                            <button onclick="copyFormula('CONT.SE(C2:C50; &quot;Entregue&quot;)', 'CONT.SE')" class="hover:text-cyber-green transition-colors flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> Copiar
+                            </button>
+                        </div>
+                        <code class="text-cyber-green font-semibold">=CONT.SE(C2:C50; "Entregue")</code>
+                    </div>
+
+                    <div class="bg-cyber-dark/60 rounded-xl p-4 border border-cyber-border/40 text-xs text-slate-300">
+                        <span class="text-cyber-blue font-bold font-mono uppercase block mb-1">Exemplo Prático:</span>
+                        Para saber quantos trabalhos acadêmicos foram entregues em uma lista de status em <code class="text-cyber-green font-mono">C2:C50</code>, a fórmula verifica quantas vezes a palavra <strong>"Entregue"</strong> se repete.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==================== SECTION 2: INTERMEDIÁRIO ==================== -->
+        <div class="section-group mb-12" data-section="intermediario">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="p-2.5 rounded-xl bg-cyber-blue/10 border border-cyber-blue/30 text-cyber-blue">
+                    <i class="fa-solid fa-code-branch text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-white tracking-wide">2. Nível Intermediário: Análise e Lógica de Negócios</h2>
+                    <p class="text-xs font-mono text-cyber-muted">Ensine a planilha a tomar decisões autônomas e agregar dados sob condições específicas.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6">
+
+                <!-- CARD: SE -->
+                <div class="function-card glass-panel rounded-2xl p-6 border border-cyber-border glow-card transition-all" data-level="intermediario" data-keywords="se if logica condicional decisao">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="px-3 py-1 rounded-md bg-cyber-blue/20 border border-cyber-blue text-cyber-blue font-mono text-xs font-bold">INTERMEDIÁRIO</span>
+                            <h3 class="text-xl font-bold text-white font-mono">SE (IF)</h3>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400"><i class="fa-solid fa-microchip mr-1"></i> Lógica Condicional</span>
+                    </div>
+
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        Avalia se uma condição lógica é verdadeira ou falsa. Retorna um valor pré-definido para cada um dos dois cenários possíveis.
+                    </p>
+
+                    <!-- Terminal Code Block -->
+                    <div class="bg-cyber-black rounded-xl p-4 border border-cyber-border/80 font-mono text-sm relative mb-4">
+                        <div class="flex items-center justify-between text-xs text-cyber-muted mb-2 border-b border-cyber-border/40 pb-2">
+                            <span>SINTAXE DO EXCEL</span>
+                            <button onclick="copyFormula('SE(G2>=7; &quot;Aprovado&quot;; &quot;Reprovado&quot;)', 'SE')" class="hover:text-cyber-green transition-colors flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> Copiar
+                            </button>
+                        </div>
+                        <code class="text-cyber-blue font-semibold">=SE(G2&gt;=7; "Aprovado"; "Reprovado")</code>
+                    </div>
+
+                    <!-- Interactive Live Simulator for SE -->
+                    <div class="bg-cyber-dark rounded-xl p-4 border border-cyber-blue/30 my-4">
+                        <div class="text-xs font-mono text-cyber-blue mb-3 font-bold uppercase flex items-center gap-2">
+                            <i class="fa-solid fa-bolt"></i> Simulador Interativo da Função SE
+                        </div>
+                        <div class="flex flex-col sm:flex-row items-center gap-4">
+                            <div class="w-full sm:w-1/2">
+                                <label class="text-xs text-slate-400 block mb-1 font-mono">Digite a Média do Aluno:</label>
+                                <input type="number" id="sim-nota" value="8.5" step="0.5" min="0" max="10" oninput="runSimSE()" class="w-full bg-cyber-black border border-cyber-border rounded-lg px-3 py-2 text-sm font-mono text-white focus:outline-none focus:border-cyber-blue">
+                            </div>
+                            <div class="w-full sm:w-1/2 bg-cyber-black/80 rounded-lg p-3 border border-cyber-border text-center">
+                                <span class="text-xs text-slate-400 block font-mono">Resultado Retornado:</span>
+                                <span id="sim-resultado" class="text-base font-bold font-mono text-cyber-green">Aprovado</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD: SOMASE -->
+                <div class="function-card glass-panel rounded-2xl p-6 border border-cyber-border glow-card transition-all" data-level="intermediario" data-keywords="somase sumif soma condicional filtro">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="px-3 py-1 rounded-md bg-cyber-blue/20 border border-cyber-blue text-cyber-blue font-mono text-xs font-bold">INTERMEDIÁRIO</span>
+                            <h3 class="text-xl font-bold text-white font-mono">SOMASE (SUMIF)</h3>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400"><i class="fa-solid fa-filter-circle-dollar mr-1"></i> Agregação Condicional</span>
+                    </div>
+
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        Soma apenas os valores de um intervalo que satisfazem a um critério específico determinado por você (ex.: somar vendas de apenas uma filial).
+                    </p>
+
+                    <!-- Terminal Code Block -->
+                    <div class="bg-cyber-black rounded-xl p-4 border border-cyber-border/80 font-mono text-sm relative mb-4">
+                        <div class="flex items-center justify-between text-xs text-cyber-muted mb-2 border-b border-cyber-border/40 pb-2">
+                            <span>SINTAXE DO EXCEL</span>
+                            <button onclick="copyFormula('SOMASE(A2:A100; &quot;Prof. Luis&quot;; B2:B100)', 'SOMASE')" class="hover:text-cyber-green transition-colors flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> Copiar
+                            </button>
+                        </div>
+                        <code class="text-cyber-blue font-semibold">=SOMASE(A2:A100; "Prof. Luis"; B2:B100)</code>
+                    </div>
+
+                    <div class="bg-cyber-dark/60 rounded-xl p-4 border border-cyber-border/40 text-xs text-slate-300">
+                        <span class="text-cyber-blue font-bold font-mono uppercase block mb-1">Entendendo a Lógica:</span>
+                        O Excel varre a coluna <code class="text-cyber-blue font-mono">A2:A100</code> procurando por "Prof. Luis". Sempre que encontra essa palavra, pega o valor correspondente na mesma linha da coluna <code class="text-cyber-blue font-mono">B2:B100</code> e adiciona ao total acumulado.
+                    </div>
+                </div>
+
+                <!-- CARD: PROCV -->
+                <div class="function-card glass-panel rounded-2xl p-6 border border-cyber-border glow-card transition-all" data-level="intermediario" data-keywords="procv vlookup busca vertical tabela">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="px-3 py-1 rounded-md bg-cyber-blue/20 border border-cyber-blue text-cyber-blue font-mono text-xs font-bold">INTERMEDIÁRIO</span>
+                            <h3 class="text-xl font-bold text-white font-mono">PROCV (VLOOKUP)</h3>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400"><i class="fa-solid fa-magnifying-glass-location mr-1"></i> Busca Vertical</span>
+                    </div>
+
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        A clássica função de pesquisa do Excel. Procura um valor na <strong>primeira coluna</strong> de uma tabela e retorna a informação desejada de uma coluna à direita.
+                    </p>
+
+                    <!-- Terminal Code Block -->
+                    <div class="bg-cyber-black rounded-xl p-4 border border-cyber-border/80 font-mono text-sm relative mb-4">
+                        <div class="flex items-center justify-between text-xs text-cyber-muted mb-2 border-b border-cyber-border/40 pb-2">
+                            <span>SINTAXE DO EXCEL</span>
+                            <button onclick="copyFormula('PROCV(F2; A2:D500; 2; FALSO)', 'PROCV')" class="hover:text-cyber-green transition-colors flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> Copiar
+                            </button>
+                        </div>
+                        <code class="text-cyber-blue font-semibold">=PROCV(F2; A2:D500; 2; FALSO)</code>
+                    </div>
+
+                    <div class="p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-xl text-xs text-yellow-200">
+                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> <strong>Atenção:</strong> O último argumento <code class="font-mono">FALSO</code> garante a busca por uma correspondência exata. Se esquecê-lo, o Excel fará uma busca aproximada que pode gerar erros silenciosos em seus dados!
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==================== SECTION 3: AVANÇADO ==================== -->
+        <div class="section-group mb-12" data-section="avancado">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="p-2.5 rounded-xl bg-cyber-purple/10 border border-cyber-purple/30 text-cyber-purple">
+                    <i class="fa-solid fa-rocket text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-white tracking-wide">3. Nível Avançado: Alta Performance e Automação Robustez</h2>
+                    <p class="text-xs font-mono text-cyber-muted">Mapeamentos bidimensionais, buscas sem restrição de direção e eliminação de erros visuais.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6">
+
+                <!-- CARD: PROCX -->
+                <div class="function-card glass-panel rounded-2xl p-6 border border-cyber-border glow-card transition-all" data-level="avancado" data-keywords="procx xlookup busca moderna performance">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="px-3 py-1 rounded-md bg-cyber-purple/20 border border-cyber-purple text-cyber-purple font-mono text-xs font-bold">AVANÇADO</span>
+                            <h3 class="text-xl font-bold text-white font-mono">PROCX (XLOOKUP)</h3>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400"><i class="fa-solid fa-bolt-lightning mr-1"></i> Busca de Nova Geração</span>
+                    </div>
+
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        O sucessor moderno e definitivo do PROCV. Permite buscas em qualquer direção (esquerda/direita/cima/baixo), busca exata por padrão e tratamento de erro embutido.
+                    </p>
+
+                    <!-- Terminal Code Block -->
+                    <div class="bg-cyber-black rounded-xl p-4 border border-cyber-border/80 font-mono text-sm relative mb-4">
+                        <div class="flex items-center justify-between text-xs text-cyber-muted mb-2 border-b border-cyber-border/40 pb-2">
+                            <span>SINTAXE DO EXCEL (MICROSOFT 365)</span>
+                            <button onclick="copyFormula('PROCX(H2; C2:C1000; A2:A1000; &quot;Não Encontrado&quot;)', 'PROCX')" class="hover:text-cyber-green transition-colors flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> Copiar
+                            </button>
+                        </div>
+                        <code class="text-cyber-purple font-semibold">=PROCX(H2; C2:C1000; A2:A1000; "Não Encontrado")</code>
+                    </div>
+
+                    <div class="bg-cyber-dark/60 rounded-xl p-4 border border-cyber-border/40 text-xs text-slate-300">
+                        <span class="text-cyber-purple font-bold font-mono uppercase block mb-1">Por que o PROCX é Superior?</span>
+                        No exemplo acima, a chave de busca está na coluna <code class="text-cyber-purple font-mono">C</code> e o retorno desejado está na coluna <code class="text-cyber-purple font-mono">A</code> (à esquerda). O antigo <code class="font-mono">PROCV</code> falharia categoricamente nesse cenário sem reorganizar a tabela.
+                    </div>
+                </div>
+
+                <!-- CARD: ÍNDICE + CORRESP -->
+                <div class="function-card glass-panel rounded-2xl p-6 border border-cyber-border glow-card transition-all" data-level="avancado" data-keywords="indice corresp index match busca bidimensional">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="px-3 py-1 rounded-md bg-cyber-purple/20 border border-cyber-purple text-cyber-purple font-mono text-xs font-bold">AVANÇADO</span>
+                            <h3 class="text-xl font-bold text-white font-mono">ÍNDICE + CORRESP (INDEX + MATCH)</h3>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400"><i class="fa-solid fa-network-wired mr-1"></i> Busca Matricial</span>
+                    </div>
+
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        A combinação de elite do Excel clássico. O <code class="font-mono text-cyber-purple">CORRESP</code> identifica a posição exata da linha/coluna e o <code class="font-mono text-cyber-purple">ÍNDICE</code> extrai o dado exato nessa coordenada.
+                    </p>
+
+                    <!-- Terminal Code Block -->
+                    <div class="bg-cyber-black rounded-xl p-4 border border-cyber-border/80 font-mono text-sm relative mb-4">
+                        <div class="flex items-center justify-between text-xs text-cyber-muted mb-2 border-b border-cyber-border/40 pb-2">
+                            <span>SINTAXE DA COMBINAÇÃO</span>
+                            <button onclick="copyFormula('ÍNDICE(B2:B100; CORRESP(E2; A2:A100; 0))', 'ÍNDICE+CORRESP')" class="hover:text-cyber-green transition-colors flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> Copiar
+                            </button>
+                        </div>
+                        <code class="text-cyber-purple font-semibold">=ÍNDICE(B2:B100; CORRESP(E2; A2:A100; 0))</code>
+                    </div>
+
+                    <div class="bg-cyber-dark/60 rounded-xl p-4 border border-cyber-border/40 text-xs text-slate-300">
+                        <span class="text-cyber-purple font-bold font-mono uppercase block mb-1">Vantagem de Performance:</span>
+                        Ideal para planilhas gigantescas (milhares de linhas) em versões legadas do Excel, consomem consideravelmente menos processamento do que tabelas inteiras carregadas via PROCV.
+                    </div>
+                </div>
+
+                <!-- CARD: SEERRO -->
+                <div class="function-card glass-panel rounded-2xl p-6 border border-cyber-border glow-card transition-all" data-level="avancado" data-keywords="seerro iferror tratamento erro tratamento">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="px-3 py-1 rounded-md bg-cyber-purple/20 border border-cyber-purple text-cyber-purple font-mono text-xs font-bold">AVANÇADO</span>
+                            <h3 class="text-xl font-bold text-white font-mono">SEERRO (IFERROR)</h3>
+                        </div>
+                        <span class="text-xs font-mono text-slate-400"><i class="fa-solid fa-shield-halved mr-1"></i> Proteção & Design</span>
+                    </div>
+
+                    <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        Captura erros de execução como <code class="font-mono text-red-400">#N/A</code>, <code class="font-mono text-red-400">#DIV/0!</code> ou <code class="font-mono text-red-400">#VALOR!</code> e os substitui por mensagens elegantes ou células limpas em branco.
+                    </p>
+
+                    <!-- Terminal Code Block -->
+                    <div class="bg-cyber-black rounded-xl p-4 border border-cyber-border/80 font-mono text-sm relative mb-4">
+                        <div class="flex items-center justify-between text-xs text-cyber-muted mb-2 border-b border-cyber-border/40 pb-2">
+                            <span>SINTAXE DO EXCEL</span>
+                            <button onclick="copyFormula('SEERRO(A2/B2; &quot;Aguardando dados&quot;)', 'SEERRO')" class="hover:text-cyber-green transition-colors flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> Copiar
+                            </button>
+                        </div>
+                        <code class="text-cyber-purple font-semibold">=SEERRO(A2/B2; "Aguardando dados")</code>
+                    </div>
+
+                    <div class="bg-cyber-dark/60 rounded-xl p-4 border border-cyber-border/40 text-xs text-slate-300">
+                        <span class="text-cyber-purple font-bold font-mono uppercase block mb-1">Toque de Profissionalismo:</span>
+                        Evita que dashboards apresentem mensagens esteticamente feias quando houver divisões por zero ou pesquisas de códigos ainda não digitados pelo usuário.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SUMMARY COMPARISON TABLE -->
+        <section class="glass-panel rounded-2xl p-6 mb-12 border border-cyber-border">
+            <div class="flex items-center space-x-3 mb-6">
+                <i class="fa-solid fa-table-cells text-cyber-green text-xl"></i>
+                <h3 class="text-xl font-bold text-white font-mono">Tabela de Consulta Rápida das Funções</h3>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm font-mono">
+                    <thead>
+                        <tr class="bg-cyber-dark border-b border-cyber-border text-cyber-blue uppercase text-xs">
+                            <th class="p-3">Função</th>
+                            <th class="p-3">Nível</th>
+                            <th class="p-3">Categoria</th>
+                            <th class="p-3">Objetivo Principal</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-cyber-border/40 text-slate-300">
+                        <tr class="hover:bg-cyber-dark/40 transition-colors">
+                            <td class="p-3 font-bold text-cyber-green">SOMA</td>
+                            <td class="p-3 text-xs"><span class="px-2 py-0.5 rounded bg-cyber-green/20 text-cyber-green">Básico</span></td>
+                            <td class="p-3 text-xs text-slate-400">Matemática</td>
+                            <td class="p-3">Somar rapidamente valores em linha ou coluna.</td>
+                        </tr>
+                        <tr class="hover:bg-cyber-dark/40 transition-colors">
+                            <td class="p-3 font-bold text-cyber-green">MÉDIA</td>
+                            <td class="p-3 text-xs"><span class="px-2 py-0.5 rounded bg-cyber-green/20 text-cyber-green">Básico</span></td>
+                            <td class="p-3 text-xs text-slate-400">Estatística</td>
+                            <td class="p-3">Calcular ponto médio de notas ou vendas.</td>
+                        </tr>
+                        <tr class="hover:bg-cyber-dark/40 transition-colors">
+                            <td class="p-3 font-bold text-cyber-green">CONT.SE</td>
+                            <td class="p-3 text-xs"><span class="px-2 py-0.5 rounded bg-cyber-green/20 text-cyber-green">Básico</span></td>
+                            <td class="p-3 text-xs text-slate-400">Estatística</td>
+                            <td class="p-3">Contar células com base em uma condição.</td>
+                        </tr>
+                        <tr class="hover:bg-cyber-dark/40 transition-colors">
+                            <td class="p-3 font-bold text-cyber-blue">SE</td>
+                            <td class="p-3 text-xs"><span class="px-2 py-0.5 rounded bg-cyber-blue/20 text-cyber-blue">Intermediário</span></td>
+                            <td class="p-3 text-xs text-slate-400">Lógica</td>
+                            <td class="p-3">Retornar respostas com base em teste verdadeiro/falso.</td>
+                        </tr>
+                        <tr class="hover:bg-cyber-dark/40 transition-colors">
+                            <td class="p-3 font-bold text-cyber-blue">SOMASE</td>
+                            <td class="p-3 text-xs"><span class="px-2 py-0.5 rounded bg-cyber-blue/20 text-cyber-blue">Intermediário</span></td>
+                            <td class="p-3 text-xs text-slate-400">Matemática</td>
+                            <td class="p-3">Somar valores filtrando apenas por um critério.</td>
+                        </tr>
+                        <tr class="hover:bg-cyber-dark/40 transition-colors">
+                            <td class="p-3 font-bold text-cyber-blue">PROCV</td>
+                            <td class="p-3 text-xs"><span class="px-2 py-0.5 rounded bg-cyber-blue/20 text-cyber-blue">Intermediário</span></td>
+                            <td class="p-3 text-xs text-slate-400">Busca</td>
+                            <td class="p-3">Pesquisar na vertical da esquerda para a direita.</td>
+                        </tr>
+                        <tr class="hover:bg-cyber-dark/40 transition-colors">
+                            <td class="p-3 font-bold text-cyber-purple">PROCX</td>
+                            <td class="p-3 text-xs"><span class="px-2 py-0.5 rounded bg-cyber-purple/20 text-cyber-purple">Avançado</span></td>
+                            <td class="p-3 text-xs text-slate-400">Busca Moderna</td>
+                            <td class="p-3">Busca bidirecional flexível com proteção nativa.</td>
+                        </tr>
+                        <tr class="hover:bg-cyber-dark/40 transition-colors">
+                            <td class="p-3 font-bold text-cyber-purple">ÍNDICE+CORRESP</td>
+                            <td class="p-3 text-xs"><span class="px-2 py-0.5 rounded bg-cyber-purple/20 text-cyber-purple">Avançado</span></td>
+                            <td class="p-3 text-xs text-slate-400">Busca Matricial</td>
+                            <td class="p-3">Localização ultrarrápida em grandes volumes de dados.</td>
+                        </tr>
+                        <tr class="hover:bg-cyber-dark/40 transition-colors">
+                            <td class="p-3 font-bold text-cyber-purple">SEERRO</td>
+                            <td class="p-3 text-xs"><span class="px-2 py-0.5 rounded bg-cyber-purple/20 text-cyber-purple">Avançado</span></td>
+                            <td class="p-3 text-xs text-slate-400">Tratamento</td>
+                            <td class="p-3">Substituir mensagens de falha por textos amigáveis.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- PROFESSOR'S BEST PRACTICES BOX -->
+        <section class="glass-panel rounded-2xl p-6 md:p-8 mb-12 border border-cyber-green/30 bg-gradient-to-br from-cyber-dark to-cyber-black">
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="p-3 rounded-xl bg-cyber-green/20 text-cyber-green">
+                    <i class="fa-solid fa-graduation-cap text-2xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white">Dicas de Ouro do Prof. Luis Carvalho</h3>
+                    <p class="text-xs font-mono text-cyber-green">3 Regras fundamentais para criar planilhas à prova de falhas</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-cyber-black/70 p-5 rounded-xl border border-cyber-border">
+                    <div class="text-cyber-green font-mono font-bold text-lg mb-2">01. Zero "Hardcoding"</div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Nunca coloque valores fixos dentro de fórmulas (ex: <code class="font-mono text-cyber-green">=A1*0.15</code>). Crie uma célula de parâmetro dedicada para a taxa de <code class="font-mono text-cyber-green">0,15</code> e aponte para ela.
+                    </p>
+                </div>
+                <div class="bg-cyber-black/70 p-5 rounded-xl border border-cyber-border">
+                    <div class="text-cyber-blue font-mono font-bold text-lg mb-2">02. Formatos Importam</div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Se uma fórmula de busca falhar sem motivo aparente, certifique-se de que os números não estão salvos acidentalmente como formato "Texto".
+                    </p>
+                </div>
+                <div class="bg-cyber-black/70 p-5 rounded-xl border border-cyber-border">
+                    <div class="text-cyber-purple font-mono font-bold text-lg mb-2">03. Tabelas Dinâmicas</div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Converta seus dados com o atalho <code class="font-mono text-cyber-purple">CTRL + T</code>. As tabelas oficiais do Excel expandem o intervalo das fórmulas automaticamente ao inserir novas linhas.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AUTHOR FOOTER / CALL TO ACTION -->
+        <footer class="glass-panel rounded-3xl p-8 border border-cyber-border text-center relative overflow-hidden">
+            <div class="relative z-10 max-w-2xl mx-auto">
+                <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-cyber-green to-cyber-blue p-1 mb-4">
+                    <div class="w-full h-full bg-cyber-black rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-user-graduate text-3xl text-cyber-green"></i>
+                    </div>
+                </div>
+
+                <h4 class="text-2xl font-bold text-white mb-2">Gostou deste Checkpoint?</h4>
+                <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                    A prática constante é o único caminho para a maestria no Excel. Compartilhe este artigo com seus colegas de equipe ou alunos e deixe seu comentário abaixo com a sua dúvida técnica!
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-4 text-xs font-mono">
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="px-6 py-3 rounded-xl bg-cyber-blue text-black font-bold hover:bg-cyber-green transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-up"></i> Voltar ao Topo
+                    </button>
+                </div>
+            </div>
+        </footer>
+
+    </article>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Interactive Live Simulator for 'SE' Formula
+        function runSimSE() {
+            const inputVal = parseFloat(document.getElementById('sim-nota').value) || 0;
+            const resElem = document.getElementById('sim-resultado');
+
+            if (inputVal >= 7.0) {
+                resElem.textContent = "Aprovado";
+                resElem.className = "text-base font-bold font-mono text-cyber-green";
+            } else if (inputVal >= 5.0) {
+                resElem.textContent = "Recuperação";
+                resElem.className = "text-base font-bold font-mono text-yellow-400";
+            } else {
+                resElem.textContent = "Reprovado";
+                resElem.className = "text-base font-bold font-mono text-red-400";
+            }
+        }
+
+        // Copy Formula to Clipboard with Toast Notification
+        function copyFormula(formulaText, name) {
+            // Using execCommand fallback for seamless iFrame / web embed support
+            const textarea = document.createElement('textarea');
+            textarea.value = '=' + formulaText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                showToast(`Fórmula =${name} copiada com sucesso!`);
+            } catch (err) {
+                showToast('Erro ao copiar formula.');
+            }
+            
+            document.body.removeChild(textarea);
+        }
+
+        // Toast Notification System
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = msg;
+            
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        // Filter Function Cards by Search Input
+        function filterFunctions() {
+            const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.function-card');
+
+            cards.forEach(card => {
+                const keywords = card.getAttribute('data-keywords').toLowerCase();
+                const textContent = card.textContent.toLowerCase();
+
+                if (keywords.includes(searchVal) || textContent.includes(searchVal)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Filter Function Cards by Level Tabs
+        function setFilter(level) {
+            const buttons = ['all', 'basico', 'intermediario', 'avancado'];
+            const sections = document.querySelectorAll('.section-group');
+            const cards = document.querySelectorAll('.function-card');
+
+            // Reset tab styles
+            buttons.forEach(b => {
+                const btn = document.getElementById(`btn-${b}`);
+                if (btn) {
+                    btn.className = "px-4 py-2 rounded-lg text-xs font-mono transition-all text-slate-400 hover:text-white";
+                }
+            });
+
+            // Highlight active button
+            const activeBtn = document.getElementById(`btn-${level}`);
+            if (activeBtn) {
+                activeBtn.className = "px-4 py-2 rounded-lg text-xs font-mono transition-all bg-cyber-blue text-black font-bold";
+            }
+
+            // Filter logic
+            cards.forEach(card => {
+                const cardLevel = card.getAttribute('data-level');
+                if (level === 'all' || cardLevel === level) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Adjust Section Visibility
+            sections.forEach(sec => {
+                const secName = sec.getAttribute('data-section');
+                if (level === 'all' || secName === level) {
+                    sec.style.display = 'block';
+                } else {
+                    sec.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

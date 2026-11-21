@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Checkpoint – Prof. Luis Carvalho</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#000;--panel:#050b12;--line:#0e2a3d;--blue:#1e90ff;--cyan:#38d6ff;--green:#19f58b;--text:#d6e6f2;--dim:#7f98ab;--warn:#ffb347;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+html{scroll-padding-top:5rem;scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1.05rem/1.7 "Space Grotesk",system-ui,sans-serif;
+background-image:linear-gradient(rgba(30,144,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(30,144,255,.05) 1px,transparent 1px);background-size:44px 44px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+a{color:var(--cyan)}
+code,pre,.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{max-width:1040px;margin:auto;padding:.8rem 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.brand{font-weight:700;font-size:1.2rem;letter-spacing:.02em;color:#fff;text-decoration:none}
+.brand i{display:inline-block;width:.65rem;height:.65rem;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);margin-right:.55rem;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+nav a{color:var(--dim);text-decoration:none;margin-left:1.2rem;font-size:.95rem}
+nav a:hover,nav a:focus-visible{color:var(--green)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+main{max-width:1040px;margin:auto;padding:0 1.25rem 4rem}
+.hero{padding:4.5rem 0 3rem;display:grid;grid-template-columns:1.1fr .9fr;gap:2.5rem;align-items:center}
+h1{font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.02;margin:0 0 1.2rem;font-weight:700;letter-spacing:-.02em;
+background:linear-gradient(100deg,#fff 10%,var(--cyan) 55%,var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--dim);max-width:34rem;margin:0 0 1.6rem}
+.chip{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;font-size:.85rem;color:var(--cyan);margin:0 .4rem .4rem 0;background:rgba(30,144,255,.07)}
+.btn{display:inline-block;background:var(--green);color:#00170b;font-weight:700;padding:.75rem 1.4rem;border-radius:4px;text-decoration:none;box-shadow:0 0 24px rgba(25,245,139,.35)}
+.btn:hover{background:#5dffb0}
+.disks{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:1.2rem;box-shadow:0 0 40px rgba(30,144,255,.15)}
+.disk{border:1px solid var(--blue);border-radius:4px;padding:.8rem 1rem;font-size:.85rem}
+.disk b{display:block;font-size:.95rem;color:#fff}
+.disk.new{border-color:var(--green);box-shadow:inset 0 0 20px rgba(25,245,139,.12)}
+.disk span{display:inline-block;margin:.4rem .4rem 0 0;padding:.1rem .5rem;border-radius:3px;background:rgba(30,144,255,.15);color:var(--cyan)}
+.disk.new span{background:rgba(25,245,139,.15);color:var(--green)}
+.flow{text-align:center;color:var(--green);padding:.5rem 0;font-size:.85rem}
+.flow svg{display:block;margin:auto}
+.dash{stroke-dasharray:6 6;animation:dash 1.2s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-12}}
+article{border-top:1px solid var(--line);padding-top:2.5rem}
+article>h2{font-size:clamp(1.8rem,4vw,2.5rem);line-height:1.15;margin:0 0 .6rem;color:#fff}
+.meta{color:var(--dim);font-size:.9rem;margin-bottom:1.5rem}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+.cmp>div{border:1px solid var(--line);background:var(--panel);border-radius:6px;padding:1rem 1.2rem}
+.cmp h3{margin:0 0 .4rem;font-size:1rem;color:var(--cyan)}
+.cmp ul{margin:0;padding-left:1.1rem;color:var(--dim)}
+.step{display:grid;grid-template-columns:3.2rem 1fr;gap:1rem;margin:2.2rem 0;min-width:0}
+.step>.n{font:500 1rem "JetBrains Mono",monospace;color:var(--green);border:1px solid var(--green);border-radius:4px;height:2.4rem;display:grid;place-items:center;box-shadow:0 0 14px rgba(25,245,139,.25)}
+.step>div{min-width:0}
+.step h3{margin:0 0 .4rem;font-size:1.3rem;color:#fff}
+.step p{margin:.4rem 0}
+.code{position:relative;margin:.8rem 0;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:4px;background:var(--panel)}
+.code pre{margin:0;padding:.9rem 1rem;overflow-x:auto;font-size:.88rem;line-height:1.6;color:#bfeaff}
+.code button{position:absolute;top:.4rem;right:.4rem;background:transparent;color:var(--dim);border:1px solid var(--line);border-radius:3px;font:inherit;font-size:.75rem;padding:.15rem .55rem;cursor:pointer}
+.code button:hover{color:var(--green);border-color:var(--green)}
+.code pre{padding-right:4.5rem}
+.note{border:1px solid var(--warn);background:rgba(255,179,71,.07);border-radius:4px;padding:.7rem 1rem;margin:.8rem 0;color:#ffe2b8;font-size:.97rem}
+.ok{border-color:var(--green);background:rgba(25,245,139,.07);color:#b8ffdc}
+p code,li code,td code{background:rgba(30,144,255,.14);color:var(--cyan);padding:.05rem .35rem;border-radius:3px;font-size:.88em}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+td,th{border-bottom:1px solid var(--line);padding:.5rem .6rem;text-align:left}
+th{color:var(--cyan);font-weight:500}
+footer{border-top:1px solid var(--line);padding:2rem 1.25rem;text-align:center;color:var(--dim);font-size:.9rem}
+footer b{color:var(--green)}
+@media(max-width:760px){.hero,.cmp{grid-template-columns:1fr}.step{grid-template-columns:1fr}.step>.n{width:3.2rem}nav a{margin:0 1rem 0 0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="bar">
+<a class="brand" href="#topo"><i></i>Checkpoint</a>
+<nav><a href="#tutorial">Tutorial</a><a href="#passos">Passo a passo</a><a href="#verificar">Verificação</a></nav>
+</div></header>
+
+<main id="topo">
+<section class="hero">
+<div>
+<span class="chip">Linux</span><span class="chip">Ubuntu</span><span class="chip">Armazenamento</span>
+<h1>Checkpoint</h1>
+<p class="lead">Tecnologia, redes e Desenvolvimento explicados na prática, por Prof. Esp. Luis Carvalho. Cada texto é um ponto de salvamento: você aprende, testa e segue em frente.</p>
+<a class="btn" href="#tutorial">Ler o tutorial mais recente</a>
+</div>
+<div class="disks" aria-label="Diagrama da migração do /home">
+<div class="disk"><b>NVMe 256 GB</b><span>/</span><span>/boot</span></div>
+<div class="flow"><svg width="40" height="46" viewBox="0 0 40 46" aria-hidden="true"><path class="dash" d="M20 2v34" stroke="#19f58b" stroke-width="2" fill="none"/><path d="M12 32l8 11 8-11z" fill="#19f58b"/></svg>/home muda de disco</div>
+<div class="disk new"><b>SSD SATA 1 TB</b><span>/home</span></div>
+</div>
+</section>
+
+<article id="tutorial">
+<h2>Mova o /home para outro SSD usando o Recovery Mode</h2>
+<div class="meta mono">Ubuntu · nível avançado · sem Live USB</div>
+<p>Neste tutorial você move todo o <code>/home</code> do NVMe de 256 GB para um SSD SATA de 1 TB, preservando permissões, ACLs e atributos. O sistema continua no NVMe e seus arquivos pessoais ganham espaço de sobra.</p>
+
+<div class="cmp">
+<div><h3>Antes</h3><ul><li>NVMe 256 GB: <code>/</code>, <code>/boot</code> e <code>/home</code></li><li>SSD 1 TB: vazio</li></ul></div>
+<div><h3>Depois</h3><ul><li>NVMe 256 GB: <code>/</code> e <code>/boot</code></li><li>SSD 1 TB: <code>/home</code></li></ul></div>
+</div>
+<p>Vantagens: mais espaço para Downloads, ISOs, vídeos, projetos e VMs; menos ocupação do NVMe; reinstalação futura do Ubuntu mais simples.</p>
+
+<div id="passos"></div>
+
+<div class="step"><div class="n">1</div><div>
+<h3>Prepare e identifique os discos</h3>
+<p>No Ubuntu normal, faça backup do <code>fstab</code> e liste os discos.</p>
+<div class="code"><button>Copiar</button><pre>sudo cp /etc/fstab ~/fstab.backup
+lsblk -f</pre></div>
+<p>Normalmente <code>nvme0n1</code> é o NVMe de 256 GB e <code>sda</code> é o SSD SATA de 1 TB. Anote os nomes no seu computador, eles podem variar.</p>
+</div></div>
+
+<div class="step"><div class="n">2</div><div>
+<h3>Entre no Recovery Mode</h3>
+<div class="code"><button>Copiar</button><pre>sudo reboot</pre></div>
+<p>No GRUB, escolha <code>Advanced options for Ubuntu</code>, depois <code>Ubuntu (recovery mode)</code>. No Recovery Menu, selecione <code>root</code> e você cairá em <code>root@ubuntu:~#</code>.</p>
+</div></div>
+
+<div class="step"><div class="n">3</div><div>
+<h3>Remonte a raiz como leitura e escrita</h3>
+<p>O Recovery abre o sistema somente leitura.</p>
+<div class="code"><button>Copiar</button><pre>mount -o remount,rw /
+mount | grep " / "</pre></div>
+</div></div>
+
+<div class="step"><div class="n">4</div><div>
+<h3>Crie a partição no SSD novo</h3>
+<div class="code"><button>Copiar</button><pre>lsblk
+fdisk /dev/sda</pre></div>
+<p>Dentro do <code>fdisk</code>, digite <code>g</code> (tabela GPT), <code>n</code> (nova partição), pressione Enter três vezes para aceitar os padrões e finalize com <code>w</code>. Isso cria <code>/dev/sda1</code>.</p>
+</div></div>
+
+<div class="step"><div class="n">5</div><div>
+<h3>Formate em EXT4</h3>
+<div class="note"><b>Atenção:</b> a formatação apaga tudo. Confirme com <code>lsblk</code> que <code>/dev/sda</code> é mesmo o SSD novo e vazio.</div>
+<div class="code"><button>Copiar</button><pre>mkfs.ext4 /dev/sda1</pre></div>
+</div></div>
+
+<div class="step"><div class="n">6</div><div>
+<h3>Monte em um ponto temporário</h3>
+<div class="code"><button>Copiar</button><pre>mkdir /mnt/novohome
+mount /dev/sda1 /mnt/novohome
+df -h</pre></div>
+<p>O <code>df -h</code> deve mostrar <code>/dev/sda1</code> montado em <code>/mnt/novohome</code>.</p>
+</div></div>
+
+<div class="step"><div class="n">7</div><div>
+<h3>Copie todo o /home e confira</h3>
+<div class="code"><button>Copiar</button><pre>rsync -aAXHv --progress /home/ /mnt/novohome/
+ls /mnt/novohome
+diff -rq /home /mnt/novohome</pre></div>
+<div class="tbl"><table>
+<tr><th>Opção</th><th>Função</th></tr>
+<tr><td><code>-a</code></td><td>preserva permissões e estrutura</td></tr>
+<tr><td><code>-A</code></td><td>preserva ACLs</td></tr>
+<tr><td><code>-X</code></td><td>preserva atributos estendidos</td></tr>
+<tr><td><code>-H</code></td><td>preserva hardlinks</td></tr>
+<tr><td><code>-v</code></td><td>modo verboso</td></tr>
+</table></div>
+<p>Você deve ver seu usuário principal em <code>/mnt/novohome</code>. Se o <code>diff</code> não apontar diferenças relevantes, a cópia está completa. Faça essa conferência antes de renomear o <code>/home</code>.</p>
+</div></div>
+
+<div class="step"><div class="n">8</div><div>
+<h3>Copie o UUID da partição nova</h3>
+<div class="code"><button>Copiar</button><pre>blkid</pre></div>
+<p>Procure a linha de <code>/dev/sda1</code> e copie o valor de <code>UUID</code>, por exemplo <code>4ae9d6d4-1234-5678-9876-aabbccddeeff</code>.</p>
+</div></div>
+
+<div class="step"><div class="n">9</div><div>
+<h3>Guarde o home antigo</h3>
+<p>Nunca apague de imediato. Renomeie e crie um diretório vazio para servir de ponto de montagem.</p>
+<div class="code"><button>Copiar</button><pre>mv /home /home_backup
+mkdir /home</pre></div>
+</div></div>
+
+<div class="step"><div class="n">10</div><div>
+<h3>Configure o fstab</h3>
+<div class="code"><button>Copiar</button><pre>nano /etc/fstab</pre></div>
+<p>Adicione ao final, trocando pelo UUID real:</p>
+<div class="code"><button>Copiar</button><pre>UUID=4ae9d6d4-1234-5678-9876-aabbccddeeff /home ext4 defaults 0 2</pre></div>
+<p>Salve com <code>Ctrl+O</code>, <code>Enter</code> e saia com <code>Ctrl+X</code>.</p>
+</div></div>
+
+<div class="step"><div class="n">11</div><div>
+<h3>Teste sem reiniciar</h3>
+<div class="code"><button>Copiar</button><pre>mount -a
+df -h
+ls /home
+ls /home/SEU_USUARIO</pre></div>
+<p>Sem erros no <code>mount -a</code>, o <code>df -h</code> deve mostrar algo como <code>/dev/sda1  916G  20G  /home</code>. Dentro da pasta do usuário, confira Downloads, Documentos, Vídeos e Imagens.</p>
+</div></div>
+
+<div class="step"><div class="n">12</div><div>
+<h3>Reinicie e valide</h3>
+<div class="code"><button>Copiar</button><pre>reboot</pre></div>
+<p>Depois do login normal:</p>
+<div class="code"><button>Copiar</button><pre>df -h
+touch ~/teste.txt
+ls ~</pre></div>
+<p>O NVMe (~238 G) deve aparecer em <code>/</code> e o <code>/dev/sda1</code> (~932 G) em <code>/home</code>.</p>
+</div></div>
+
+<div class="step"><div class="n">13</div><div>
+<h3>Remova o backup antigo</h3>
+<div class="note">Espere alguns dias de uso. Enquanto <code>/home_backup</code> existir, ele continua ocupando espaço no NVMe.</div>
+<div class="code"><button>Copiar</button><pre>sudo du -sh /home_backup
+sudo rm -rf /home_backup</pre></div>
+<p>Rode o <code>rm -rf</code> somente se tudo estiver funcionando e você tiver outra cópia do que é importante.</p>
+</div></div>
+
+<h2 id="verificar" style="color:#fff;font-size:1.7rem;margin:3rem 0 .6rem">Como saber se deu certo</h2>
+<div class="code"><button>Copiar</button><pre>mount | grep home
+df -h /home</pre></div>
+<div class="note ok">Resultado esperado: <code>/dev/sda1 on /home type ext4</code> e, no <code>df</code>, tamanho de cerca de 932G. Isso comprova que o <code>/home</code> está fisicamente no SSD de 1 TB.</div>
+</article>
+</main>
+
+<footer><b>Checkpoint</b> · Prof. Esp. Luis Carvalho · EETEPA, Capanema, PA</footer>
+
+<script>
+document.querySelectorAll('.code button').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.nextElementSibling.innerText;
+    try{
+      navigator.clipboard.writeText(t).then(function(){b.textContent='Copiado';setTimeout(function(){b.textContent='Copiar'},1500)},function(){b.textContent='Selecione e copie'});
+    }catch(e){b.textContent='Selecione e copie'}
+  });
+});
+</script>
+</body>
+</html>

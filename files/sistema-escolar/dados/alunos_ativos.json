@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "nome": "Luis Orlando Pinheiro Carvalho",
+        "matricula": "00159",
+        "email": "luisorlandocarvalho@gmail.com",
+        "ativo": true
+    },
+    {
+        "id": 3,
+        "nome": "Ana Beatriz Souza",
+        "matricula": "195990",
+        "email": "ana.souza@escola.com",
+        "ativo": true
+    }
+]

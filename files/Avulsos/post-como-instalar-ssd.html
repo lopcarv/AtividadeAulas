@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Tutorial: Migração do /home para SSD secundário no Ubuntu</title>
+  <style>
+    /* Estilos para integração em blogs / Google Sites (Incorporar código) */
+    .teo-article-container {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      line-height: 1.6;
+      color: #24292e;
+      background-color: #ffffff;
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .teo-header {
+      border-bottom: 2px solid #e1e4e8;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+    }
+
+    .teo-title {
+      font-size: 2rem;
+      color: #1b1f23;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .teo-subtitle {
+      font-size: 1.1rem;
+      color: #586069;
+      margin-top: 0;
+    }
+
+    .teo-badge {
+      display: inline-block;
+      background-color: #e1f5fe;
+      color: #0288d1;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .teo-badge-danger {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+
+    .teo-card {
+      background: #f6f8fa;
+      border: 1px solid #e1e4e8;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .teo-card-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #24292e;
+    }
+
+    h2.teo-section-title {
+      font-size: 1.4rem;
+      border-bottom: 1px solid #eaecef;
+      padding-bottom: 8px;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      color: #0366d6;
+      display: flex;
+      align-items: center;
+    }
+
+    h2.teo-section-title .step-number {
+      background-color: #0366d6;
+      color: #ffffff;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    p {
+      margin-bottom: 12px;
+    }
+
+    ul, ol {
+      padding-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    pre {
+      background-color: #1e1e1e;
+      color: #d4d4d4;
+      padding: 14px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      margin-top: 8px;
+      margin-bottom: 16px;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      background-color: #f3f3f3;
+      color: #d73a49;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+
+    pre code {
+      background-color: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    .teo-alert {
+      background-color: #fff3cd;
+      border-left: 4px solid #ffc107;
+      color: #856404;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .teo-alert-danger {
+      background-color: #f8d7da;
+      border-left-color: #dc3545;
+      color: #721c24;
+    }
+
+    .teo-summary-box {
+      background-color: #f0f7ff;
+      border: 1px solid #c8e1ff;
+      border-radius: 6px;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    .teo-summary-box h3 {
+      margin-top: 0;
+      color: #0366d6;
+    }
+
+    .teo-footer {
+      margin-top: 40px;
+      border-top: 1px solid #e1e4e8;
+      padding-top: 20px;
+      font-size: 0.9rem;
+      color: #586069;
+    }
+
+    .teo-tree {
+      font-family: monospace;
+      white-space: pre;
+      background: #272822;
+      color: #f8f8f2;
+      padding: 12px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="teo-article-container">
+
+  <!-- CABEÇALHO DO ARTIGO -->
+  <header class="teo-header">
+    <span class="teo-badge">Ubuntu Linux</span>
+    <span class="teo-badge">SysAdmin</span>
+    <span class="teo-badge teo-badge-danger">Avançado</span>
+    <h1 class="teo-title">Guia Avançado: Mover o /home para um SSD Secundário no Ubuntu (Recovery Mode + Root)</h1>
+    <p class="teo-subtitle">Aprenda a migrar completamente o diretório de usuários de um NVMe de 256 GB para um SSD SATA de 1 TB sem a necessidade de pendrive Live USB.</p>
+  </header>
+
+  <!-- VISÃO GERAL DA ESTRUTURA -->
+  <div class="teo-card">
+    <div class="teo-card-title">🎯 Objetivo do Tutorial</div>
+    <p>Mover completamente o ponto de montagem <code>/home</code> mantendo permissões e atributos do sistema intactos.</p>
+
+    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 250px;">
+        <strong>📌 Estrutura Inicial:</strong>
+        <div class="teo-tree">NVMe 256GB
+├── /
+├── /boot
+└── /home
+
+SSD 1TB
+└── (vazio)</div>
+      </div>
+      <div style="flex: 1; min-width: 250px;">
+        <strong>✅ Estrutura Final:</strong>
+        <div class="teo-tree">NVMe 256GB
+├── /
+└── /boot
+
+SSD 1TB
+└── /home</div>
+      </div>
+    </div>
+
+    <p style="margin-top: 15px; margin-bottom: 0;"><strong>Vantagens da Migração:</strong> Espaço expandido para arquivos pessoais e ISOs, otimização da vida útil e do espaço do NVMe, facilitando reinstalações futuras do SO mantendo o <code>/home</code> intacto em unidade dedicada.</p>
+  </div>
+
+  <!-- FASE 1 -->
+  <h2 class="teo-section-title"><span class="step-number">1</span> FASE 1 – Preparação Inicial</h2>
+  <p>1. Faça o backup do arquivo de montagem de discos do sistema no ambiente Ubuntu normal:</p>
+  <pre><code>sudo cp /etc/fstab ~/fstab.backup</code></pre>
+
+  <p>2. Identifique a nomeação e o esquema dos discos no sistema:</p>
+  <pre><code>lsblk -f</code></pre>
+  <p>Exemplo de saída:</p>
+  <pre><code>NAME        FSTYPE FSVER LABEL UUID
+nvme0n1
+├─nvme0n1p1 vfat
+└─nvme0n1p2 ext4
+sda
+└─sda1</code></pre>
+  <p><em>Anote a identificação exata dos dispositivos (Exemplo: <code>nvme0n1</code> para o SSD NVMe e <code>sda</code> para o SSD SATA de 1 TB).</em></p>
+
+  <!-- FASE 2 -->
+  <h2 class="teo-section-title"><span class="step-number">2</span> FASE 2 – Acessar o Recovery Mode</h2>
+  <p>1. Reinicie o sistema:</p>
+  <pre><code>sudo reboot</code></pre>
+  <p>2. Na tela do carregador de inicialização <strong>GRUB</strong>, selecione:</p>
+  <p><code>Advanced options for Ubuntu</code> &rarr; <code>Ubuntu (recovery mode)</code></p>
+  <p>3. No menu do Recovery Menu, escolha a opção <strong>root</strong>. O terminal abrirá na linha de comando:</p>
+  <pre><code>root@ubuntu:~#</code></pre>
+
+  <!-- FASE 3 -->
+  <h2 class="teo-section-title"><span class="step-number">3</span> FASE 3 – Remontar a Partição Raiz com Leitura e Escrita</h2>
+  <p>O modo de recuperação inicia a partição de modo somente leitura por padrão. Altere para modo de escrita com o comando:</p>
+  <pre><code>mount -o remount,rw /</code></pre>
+  <p>Confirme a montagem correta:</p>
+  <pre><code>mount | grep " / "</code></pre>
+
+  <!-- FASE 4 -->
+  <h2 class="teo-section-title"><span class="step-number">4</span> FASE 4 – Criar a Tabela e Partição no Novo SSD</h2>
+  <p>Verifique o rótulo dos discos com <code>lsblk</code>. Abrindo o <code>fdisk</code> para o SSD secundário (supondo <code>/dev/sda</code>):</p>
+  <pre><code>fdisk /dev/sda</code></pre>
+  <p>Insira a sequência de comandos dentro da interface interativa do fdisk:</p>
+  <ul>
+    <li><code>g</code> &mdash; Cria uma nova tabela de partições GPT vazia</li>
+    <li><code>n</code> &mdash; Adiciona uma nova partição</li>
+    <li><code>Enter</code> &mdash; Aceita o número padrão da partição</li>
+    <li><code>Enter</code> &mdash; Aceita o primeiro setor padrão</li>
+    <li><code>Enter</code> &mdash; Aceita o último setor padrão (usa todo o disco)</li>
+    <li><code>w</code> &mdash; Grava a tabela de partições no disco e sai</li>
+  </ul>
+  <p>Isso gerará a nova partição: <code>/dev/sda1</code>.</p>
+
+  <!-- FASE 5 -->
+  <h2 class="teo-section-title"><span class="step-number">5</span> FASE 5 – Formatação do Disco</h2>
+  <div class="teo-alert teo-alert-danger">
+    <strong>⚠️ ATENÇÃO EXTREMA:</strong> Certifique-se de que <code>/dev/sda1</code> é o identificador correto da partição do novo SSD para evitar a perda irrecuperável de dados em outro disco.
+  </div>
+  <p>Execute a formatação com sistema de arquivos EXT4:</p>
+  <pre><code>mkfs.ext4 /dev/sda1</code></pre>
+
+  <!-- FASE 6 -->
+  <h2 class="teo-section-title"><span class="step-number">6</span> FASE 6 – Ponto de Montagem Temporário</h2>
+  <p>Crie e monte o diretório temporário para a migração:</p>
+  <pre><code>mkdir /mnt/novohome
+mount /dev/sda1 /mnt/novohome</code></pre>
+  <p>Confirme com <code>df -h</code>. O volume <code>/dev/sda1</code> deve constar montado em <code>/mnt/novohome</code>.</p>
+
+  <!-- FASE 7 -->
+  <h2 class="teo-section-title"><span class="step-number">7</span> FASE 7 – Copiar Todos os Dados Mantendo Atributos</h2>
+  <p>Sincronize os dados utilizando o <code>rsync</code> com preservação completa de permissões, ACLs e atributos estendidos:</p>
+  <pre><code>rsync -aAXHv --progress /home/ /mnt/novohome/</code></pre>
+  <p><strong>Parâmetros do rsync:</strong></p>
+  <ul>
+    <li><code>-a</code> : Preserva permissões, datas, proprietários e links simbólicos (modo arquivo).</li>
+    <li><code>-A</code> : Preserva ACLs (Listas de Controle de Acesso).</li>
+    <li><code>-X</code> : Preserva Atributos Estendidos do sistema de arquivos.</li>
+    <li><code>-H</code> : Preserva Links Rígidos (Hard links).</li>
+    <li><code>-v</code> : Ativa a exibição detalhada dos arquivos no terminal.</li>
+  </ul>
+  <p>Verifique o conteúdo do diretório clonado:</p>
+  <pre><code>ls /mnt/novohome</code></pre>
+
+  <!-- FASE 8 -->
+  <h2 class="teo-section-title"><span class="step-number">8</span> FASE 8 – Obtenção do UUID do Novo SSD</h2>
+  <p>Obtenha o identificador único do volume formatado:</p>
+  <pre><code>blkid</code></pre>
+  <p>Exemplo de retorno do comando:</p>
+  <pre><code>/dev/sda1: UUID="4ae9d6d4-1234-5678-9876-aabbccddeeff" BLOCK_SIZE="4096" TYPE="ext4"</code></pre>
+  <p><em>Copie ou anote com precisão a sequência de caracteres contida dentro das aspas do <code>UUID</code>.</em></p>
+
+  <!-- FASE 9 -->
+  <h2 class="teo-section-title"><span class="step-number">9</span> FASE 9 – Preservação do /home Antigo</h2>
+  <p>Renomeie o diretório original por segurança antes de aplicar as mudanças definitivas:</p>
+  <pre><code>mv /home /home_backup
+mkdir /home</code></pre>
+
+  <!-- FASE 10 -->
+  <h2 class="teo-section-title"><span class="step-number">10</span> FASE 10 – Configuração da Montagem Automática no /etc/fstab</h2>
+  <p>Abra o editor de texto <code>nano</code> para incluir a entrada da nova partição:</p>
+  <pre><code>nano /etc/fstab</code></pre>
+  <p>Adicione a seguinte linha ao final do arquivo (substituindo pelo seu UUID real):</p>
+  <pre><code>UUID=4ae9d6d4-1234-5678-9876-aabbccddeeff /home ext4 defaults 0 2</code></pre>
+  <p>Salve com <code>CTRL + O</code>, confirme com <code>ENTER</code> e saia pressionando <code>CTRL + X</code>.</p>
+
+  <!-- FASE 11 -->
+  <h2 class="teo-section-title"><span class="step-number">11</span> FASE 11 – Testar a Montagem do Ponto de Arquivos</h2>
+  <p>Carregue as entradas do fstab sem reiniciar o sistema:</p>
+  <pre><code>mount -a</code></pre>
+  <p>Verifique com <code>df -h</code> se o mapeamento foi feito adequadamente:</p>
+  <pre><code>/dev/sda1      916G   20G  /home</code></pre>
+
+  <!-- FASE 12 -->
+  <h2 class="teo-section-title"><span class="step-number">12</span> FASE 12 – Verificação da Integridade da Cópia</h2>
+  <p>Confirme a existência dos perfis e pastas de usuário:</p>
+  <pre><code>ls /home
+ls /home/seu_usuario</code></pre>
+
+  <!-- FASE 13 & 14 -->
+  <h2 class="teo-section-title"><span class="step-number">13</span> FASE 13 & 14 – Reiniciar e Validar o Sistema</h2>
+  <p>1. Reinicie o equipamento para carregar o sistema operacional normalmente:</p>
+  <pre><code>reboot</code></pre>
+  <p>2. Após realizar o login na interface gráfica do Ubuntu, execute no terminal para validar:</p>
+  <pre><code>df -h /home</code></pre>
+  <p>Saída esperada comprovando que o diretório principal reside no SSD secundário:</p>
+  <pre><code>Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1       932G   20G  865G   3% /home</code></pre>
+  <p>Faça um teste prático criando um arquivo no diretório pessoal:</p>
+  <pre><code>touch ~/teste_validacao.txt && ls -l ~/teste_validacao.txt</code></pre>
+
+  <!-- FASE 15 -->
+  <h2 class="teo-section-title"><span class="step-number">15</span> FASE 15 – Limpeza do Backup Antigo</h2>
+  <div class="teo-alert">
+    <strong>💡 Recomendação de Administrador Linux:</strong> Mantenha o diretório <code>/home_backup</code> por alguns dias. Após confirmar a estabilidade completa do sistema e de todas as aplicações, libere o espaço no NVMe executando:
+  </div>
+  <pre><code>sudo du -sh /home_backup
+sudo rm -rf /home_backup</code></pre>
+
+  <!-- DICA DE OURO -->
+  <div class="teo-card" style="border-left: 4px solid #0366d6;">
+    <div class="teo-card-title">🔍 Validação Técnica Adicional (Dica SysAdmin)</div>
+    <p>Para assegurar 100% de paridade entre o backup e o novo destino antes de reiniciar o sistema, execute a checagem com o utilitário <code>diff</code>:</p>
+    <pre><code>diff -rq /home /mnt/novohome</code></pre>
+    <p style="margin-bottom: 0;">Se o comando não retornar diferenças estruturais ou de permissão críticas, sua sincronização foi perfeitamente concluída.</p>
+  </div>
+
+  <!-- SEÇÃO DE FECHAMENTO TEOLÓGICO/EDITORIAL -->
+  <div class="teo-summary-box">
+    <h3>📌 Resumo da Operação Principal</h3>
+    <p>A migração do diretório <code>/home</code> utilizando o modo de recuperação do Linux (Recovery Mode) garante a preservação da integridade estrutural e permissões POSIX sem interferência de serviços gráficos ativas do usuário. Essa prática otimiza a camada de armazenamento mantendo a integridade operacional da instalação do Ubuntu.</p>
+
+    <hr style="border: 0; border-top: 1px solid #c8e1ff; margin: 15px 0;">
+
+    <strong>🔍 Referências Técnicas &amp; Leitura Recomendada:</strong>
+    <ul>
+      <li>Manpages Linux: <code>fstab(5)</code>, <code>rsync(1)</code>, <code>fdisk(8)</code>, <code>mkfs.ext4(8)</code>.</li>
+      <li>Documentação Oficial do Ubuntu: <em>Community Help Wiki - Partitioning/Home/Moving</em>.</li>
+    </ul>
+
+    <strong>❓ Perguntas para Reflexão / Prática Educacional:</strong>
+    <ol>
+      <li>Qual a importância das flags <code>-A</code> e <code>-X</code> no comando <code>rsync</code> para diretórios de usuários?</li>
+      <li>Por que o uso do <code>UUID</code> no arquivo <code>/etc/fstab</code> é mais seguro do que nomeações estáticas como <code>/dev/sda1</code>?</li>
+      <li>Qual é o impacto de executar essa operação em ambiente gráfico com a sessão de usuário ativa?</li>
+    </ol>
+  </div>
+
+  <footer class="teo-footer">
+    <p>© Tutorial elaborado para publicação técnica em blogs e portais educacionais. Compatível com inserção direta em blocos de HTML / Embed no Google Sites.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>

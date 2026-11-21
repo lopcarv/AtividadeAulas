@@ -1,0 +1,9 @@
+Exercicios 11
+nome_completo = "lucas ferreira souza"
+posicao_espaco = nome_completo.find(" ")
+primeiro_nome = nome_completo[:posicao_espaco].split()[0].title()
+print(f"Olá, {primeiro_nome}, seja bem-vindo ao nosso clube!")
+
+Exercício 11: Calculadora de Impostos e Taxas Financeiras
+Desafio 11.1 (Cálculo de Comissão sobre Boleto): Implemente um programa que solicite ao usuário o valor de um pagamento no formato textual brasileiro (ex: "R$ 1.250,50"). 
+O sistema deve limpar a string, convertê-la para o tipo float, calcular uma taxa administrativa de 3,5% e exibir o valor líquido resultante formatado com duas casas decimais.

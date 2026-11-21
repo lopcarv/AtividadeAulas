@@ -1,0 +1,236 @@
+[
+    {
+        "id": 2,
+        "nome": "Cliente 002",
+        "cpf": "00000000002",
+        "endereco_debito": {
+            "logradouro": "Av. Brasil",
+            "numero": 9408,
+            "bairro": "Bairro 19",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "93620-443"
+        }
+    },
+    {
+        "id": 3,
+        "nome": "Cliente 003",
+        "cpf": "00000000003",
+        "endereco_debito": {
+            "logradouro": "Rua São João",
+            "numero": 4634,
+            "bairro": "Bairro 19",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "91170-266"
+        }
+    },
+    {
+        "id": 4,
+        "nome": "Cliente 004",
+        "cpf": "00000000004",
+        "endereco_debito": {
+            "logradouro": "Rua São João",
+            "numero": 4025,
+            "bairro": "Bairro 14",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "38180-354"
+        }
+    },
+    {
+        "id": 9,
+        "nome": "Cliente 009",
+        "cpf": "00000000009",
+        "endereco_debito": {
+            "logradouro": "Rua Pará",
+            "numero": 9971,
+            "bairro": "Bairro 13",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "22222-607"
+        }
+    },
+    {
+        "id": 24,
+        "nome": "Cliente 024",
+        "cpf": "00000000024",
+        "endereco_debito": {
+            "logradouro": "Av. Brasil",
+            "numero": 9163,
+            "bairro": "Bairro 1",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "49065-771"
+        }
+    },
+    {
+        "id": 40,
+        "nome": "Cliente 040",
+        "cpf": "00000000040",
+        "endereco_debito": {
+            "logradouro": "Travessa Central",
+            "numero": 6458,
+            "bairro": "Bairro 5",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "54346-936"
+        }
+    },
+    {
+        "id": 42,
+        "nome": "Cliente 042",
+        "cpf": "00000000042",
+        "endereco_debito": {
+            "logradouro": "Travessa Central",
+            "numero": 8240,
+            "bairro": "Bairro 1",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "88298-597"
+        }
+    },
+    {
+        "id": 45,
+        "nome": "Cliente 045",
+        "cpf": "00000000045",
+        "endereco_debito": {
+            "logradouro": "Travessa Central",
+            "numero": 5413,
+            "bairro": "Bairro 15",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "11088-105"
+        }
+    },
+    {
+        "id": 47,
+        "nome": "Cliente 047",
+        "cpf": "00000000047",
+        "endereco_debito": {
+            "logradouro": "Rua São João",
+            "numero": 7653,
+            "bairro": "Bairro 13",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "84701-911"
+        }
+    },
+    {
+        "id": 59,
+        "nome": "Cliente 059",
+        "cpf": "00000000059",
+        "endereco_debito": {
+            "logradouro": "Travessa Central",
+            "numero": 9063,
+            "bairro": "Bairro 20",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "46438-749"
+        }
+    },
+    {
+        "id": 64,
+        "nome": "Cliente 064",
+        "cpf": "00000000064",
+        "endereco_debito": {
+            "logradouro": "Rua das Flores",
+            "numero": 7126,
+            "bairro": "Bairro 15",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "57178-788"
+        }
+    },
+    {
+        "id": 67,
+        "nome": "Cliente 067",
+        "cpf": "00000000067",
+        "endereco_debito": {
+            "logradouro": "Rua Pará",
+            "numero": 8413,
+            "bairro": "Bairro 2",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "35018-639"
+        }
+    },
+    {
+        "id": 68,
+        "nome": "Cliente 068",
+        "cpf": "00000000068",
+        "endereco_debito": {
+            "logradouro": "Rua das Flores",
+            "numero": 4644,
+            "bairro": "Bairro 9",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "39810-302"
+        }
+    },
+    {
+        "id": 84,
+        "nome": "Cliente 084",
+        "cpf": "00000000084",
+        "endereco_debito": {
+            "logradouro": "Rua São João",
+            "numero": 7806,
+            "bairro": "Bairro 1",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "73981-957"
+        }
+    },
+    {
+        "id": 85,
+        "nome": "Cliente 085",
+        "cpf": "00000000085",
+        "endereco_debito": {
+            "logradouro": "Av. Brasil",
+            "numero": 4906,
+            "bairro": "Bairro 4",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "65260-417"
+        }
+    },
+    {
+        "id": 86,
+        "nome": "Cliente 086",
+        "cpf": "00000000086",
+        "endereco_debito": {
+            "logradouro": "Travessa Central",
+            "numero": 4361,
+            "bairro": "Bairro 17",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "22096-516"
+        }
+    },
+    {
+        "id": 94,
+        "nome": "Cliente 094",
+        "cpf": "00000000094",
+        "endereco_debito": {
+            "logradouro": "Travessa Central",
+            "numero": 4268,
+            "bairro": "Bairro 7",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "26266-673"
+        }
+    },
+    {
+        "id": 96,
+        "nome": "Cliente 096",
+        "cpf": "00000000096",
+        "endereco_debito": {
+            "logradouro": "Travessa Central",
+            "numero": 4713,
+            "bairro": "Bairro 14",
+            "cidade": "Belém",
+            "estado": "PA",
+            "cep": "61054-808"
+        }
+    }
+]
